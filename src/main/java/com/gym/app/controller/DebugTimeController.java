@@ -20,6 +20,10 @@ public class DebugTimeController {
     @FXML
     private Label currentStatusLabel;
 
+    /**
+     * Initializes the controller class.
+     * Updates the status label with the current system date.
+     */
     @FXML
     public void initialize() {
         updateStatus();

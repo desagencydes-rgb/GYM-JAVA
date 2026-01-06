@@ -74,6 +74,9 @@ public class AttendanceController {
 
     /**
      * Toggles the automatic facial recognition scanning mode.
+     * Starts scanning if paused, or stops scanning if currently active.
+     * 
+     * @param event The ActionEvent triggered by the button.
      */
     @FXML
     void handleToggleAuto(ActionEvent event) {
@@ -84,6 +87,10 @@ public class AttendanceController {
         }
     }
 
+    /**
+     * Starts the facial recognition scanning process.
+     * Shows the camera view and schedules periodic face scans.
+     */
     private void startScanning() {
         isScanning = true;
         toggleAutoBtn.setText("Stop Scanning");
@@ -108,6 +115,10 @@ public class AttendanceController {
         }, 2000, 3000); // Wait 2s, then scan every 3s
     }
 
+    /**
+     * Stops the facial recognition scanning process.
+     * Hides the camera view and cancels the periodic scan timer.
+     */
     private void stopScanning() {
         isScanning = false;
         toggleAutoBtn.setText("Start Scanning");
@@ -200,6 +211,9 @@ public class AttendanceController {
         }
     }
 
+    /**
+     * Refreshes the attendance list from the database.
+     */
     private void refreshList() {
         attendanceList.setItems(FXCollections.observableArrayList(attendanceDAO.getRecentAttendance()));
     }

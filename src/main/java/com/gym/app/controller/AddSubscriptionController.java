@@ -21,12 +21,21 @@ import java.time.LocalDate;
  */
 public class AddSubscriptionController {
 
+    /**
+     * ComboBox to select a member.
+     */
     @FXML
     private ComboBox<Member> memberComboBox;
+
+    /**
+     * ComboBox to select a subscription plan.
+     */
     @FXML
     private ComboBox<String> planComboBox;
 
-    // Field for custom plan name (e.g. "Special Promo")
+    /**
+     * Field for custom plan name (e.g. "Special Promo").
+     */
     @FXML
     private TextField customPlanNameField;
 
@@ -40,6 +49,10 @@ public class AddSubscriptionController {
     private final MemberDAO memberDAO = new MemberDAO();
     private final SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
 
+    /**
+     * Initializes the controller class.
+     * Populates the member and plan combo boxes and sets up listeners.
+     */
     @FXML
     public void initialize() {
         // Populate Members
@@ -106,6 +119,12 @@ public class AddSubscriptionController {
         }
     }
 
+    /**
+     * Handles the "Save" button click.
+     * Validates input and creates a new Subscription in the database.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void handleSave(ActionEvent event) {
         Member selectedMember = memberComboBox.getValue();
@@ -142,11 +161,20 @@ public class AddSubscriptionController {
         }
     }
 
+    /**
+     * Handles the "Cancel" button click.
+     * Closes the window without saving.
+     *
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void handleCancel(ActionEvent event) {
         closeWindow();
     }
 
+    /**
+     * Closes the current stage/window.
+     */
     private void closeWindow() {
         Stage stage = (Stage) memberComboBox.getScene().getWindow();
         stage.close();

@@ -37,6 +37,11 @@ public class ScheduleFormController {
                 "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
     }
 
+    /**
+     * Sets the Coach ID for whom the schedule is being added.
+     * 
+     * @param coachId The ID of the coach.
+     */
     public void setCoachId(int coachId) {
         this.coachId = coachId;
     }

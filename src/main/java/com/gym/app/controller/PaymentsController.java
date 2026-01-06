@@ -36,6 +36,10 @@ public class PaymentsController {
     private final PaymentDAO paymentDAO = new PaymentDAO();
     private final MemberDAO memberDAO = new MemberDAO();
 
+    /**
+     * Initializes the controller class.
+     * Sets up the method combo box and the member combo box.
+     */
     @FXML
     public void initialize() {
         // Init Inputs
@@ -88,6 +92,9 @@ public class PaymentsController {
         }
     }
 
+    /**
+     * Refreshes the payment list from the database.
+     */
     private void refreshList() {
         paymentsListView.setItems(FXCollections.observableArrayList(paymentDAO.getAllPaymentDTOs()));
     }
@@ -101,6 +108,10 @@ public class PaymentsController {
         private final Label methodLabel;
         private final Button deleteBtn;
 
+        /**
+         * Constructor for PaymentListCell.
+         * Initializes the UI components for the cell.
+         */
         public PaymentListCell() {
             root = new HBox(15);
             root.getStyleClass().add("payment-card");

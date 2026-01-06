@@ -81,6 +81,11 @@ public class CoachFormController {
         stage.close();
     }
 
+    /**
+     * Helper to show alert messages.
+     * 
+     * @param msg The message content to display.
+     */
     private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Validation Error");

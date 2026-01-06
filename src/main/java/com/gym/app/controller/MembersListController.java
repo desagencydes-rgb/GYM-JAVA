@@ -33,6 +33,10 @@ public class MembersListController {
 
     private final MemberDAO memberDAO = new MemberDAO();
 
+    /**
+     * Initializes the controller class.
+     * Sets up the list view cell factory.
+     */
     @FXML
     public void initialize() {
         refreshList();
@@ -48,11 +52,21 @@ public class MembersListController {
         membersListView.setItems(FXCollections.observableArrayList(memberDAO.getAllMembers()));
     }
 
+    /**
+     * Opens the modal to add a new member.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void handleAddMember(ActionEvent event) {
         openModal("/fxml/member_form.fxml", "Add New Member", null);
     }
 
+    /**
+     * Opens the modal to assign a subscription plan to a member.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void handleAssignPlan(ActionEvent event) {
         openModal("/fxml/add_subscription.fxml", "Assign Plan to Member", null);
@@ -69,6 +83,10 @@ public class MembersListController {
         private final Button editBtn;
         private final Button deleteBtn;
 
+        /**
+         * Constructor for MemberListCell.
+         * Initializes the UI components for the cell.
+         */
         public MemberListCell() {
             root = new HBox(15);
             root.setAlignment(Pos.CENTER_LEFT);

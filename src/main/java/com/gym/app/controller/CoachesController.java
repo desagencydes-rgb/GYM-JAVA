@@ -38,6 +38,10 @@ public class CoachesController {
 
     private Coach selectedCoach;
 
+    /**
+     * Initializes the controller class.
+     * Sets up the list view cell factory and event listeners.
+     */
     @FXML
     public void initialize() {
         refreshList();
@@ -177,15 +181,26 @@ public class CoachesController {
         scheduleContainer.getChildren().add(card);
     }
 
+    /**
+     * Refreshes the list of coaches from the database.
+     */
     private void refreshList() {
         coachesList.setItems(FXCollections.observableArrayList(coachDAO.getAllCoaches()));
     }
 
+    /**
+     * Opens the modal dialog to add a new coach.
+     */
     @FXML
     public void handleAddCoach() {
         openCoachModal(null);
     }
 
+    /**
+     * Opens the Coach Form modal for adding or editing a coach.
+     * 
+     * @param coach The coach to edit, or null to add a new coach.
+     */
     private void openCoachModal(Coach coach) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/coach_form.fxml"));
@@ -207,6 +222,11 @@ public class CoachesController {
         }
     }
 
+    /**
+     * Opens the Schedule Form modal for adding a new session.
+     * 
+     * @param coachId The ID of the coach to add a session for.
+     */
     private void openScheduleModal(int coachId) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/schedule_form.fxml"));

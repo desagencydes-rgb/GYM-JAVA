@@ -50,31 +50,61 @@ public class MainLayoutController {
 
     // --- Navigation Handlers ---
 
+    /**
+     * Navigates to the Dashboard view.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void showDashboard(ActionEvent event) {
         loadView("dashboard");
     }
 
+    /**
+     * Navigates to the Members view.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void showMembers(ActionEvent event) {
         loadView("members_list");
     }
 
+    /**
+     * Navigates to the Coaches view.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void showCoaches(ActionEvent event) {
         loadView("coaches");
     }
 
+    /**
+     * Navigates to the Attendance view.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void showAttendance(ActionEvent event) {
         loadView("attendance");
     }
 
+    /**
+     * Navigates to the Payments view.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void showPayments(ActionEvent event) {
         loadView("payments");
     }
 
+    /**
+     * Navigates to the Debug view.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void showDebug(ActionEvent event) {
         loadView("debug_time");

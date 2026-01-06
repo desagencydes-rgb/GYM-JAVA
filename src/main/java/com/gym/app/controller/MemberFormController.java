@@ -48,6 +48,10 @@ public class MemberFormController {
     // Store the ID returned by the API temporarily until user clicks "Save"
     private String enrolledFaceId = null;
 
+    /**
+     * Initializes the controller class.
+     * Sets up the gender combo box and the camera component.
+     */
     @FXML
     public void initialize() {
         // Init Gender dropdown
@@ -192,6 +196,12 @@ public class MemberFormController {
         }
     }
 
+    /**
+     * Handles the "Cancel" button click.
+     * Stops the camera if active and closes the window.
+     * 
+     * @param event The ActionEvent triggered by the button.
+     */
     @FXML
     void handleCancel(ActionEvent event) {
         if (faceCamView != null)
@@ -199,11 +209,20 @@ public class MemberFormController {
         closeWindow();
     }
 
+    /**
+     * Closes the current stage/window.
+     */
     private void closeWindow() {
         Stage stage = (Stage) firstNameField.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Helper to show alert messages.
+     * 
+     * @param title   The title of the alert.
+     * @param content The content message.
+     */
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

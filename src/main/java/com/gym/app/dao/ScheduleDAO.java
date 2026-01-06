@@ -100,11 +100,7 @@ public class ScheduleDAO {
 
         try (Connection conn = DatabaseHelper.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery(sql)) { // Correction: using stmt not pstmt for static query if
-                                                         // desired, or pstmt.execute. Here assuming pstmt logic is fine
-                                                         // if no args.
-            // Wait, original code used pstmt without args? executeQuery() on
-            // PreparedStatement is correct.
+                ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 ScheduleItem item = new ScheduleItem(
