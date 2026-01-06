@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Dashboard View
+  - Displays key metrics (Cards).
+  - Displays Charts (Bar, Line, Pie).
+  - Displays Notifications and Weekly Schedule.
+  - Wrapped in a ScrollPane to accommodate all widgets.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: #121212;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.app.controller.DashboardController">
+   <content>
+      <VBox spacing="20.0" style="-fx-background-color: #121212;">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <!-- Header -->
+            <Label text="Dashboard" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            
+            <!-- Summary Cards Row -->
+            <HBox spacing="20.0">
+               <children>
+                  <!-- Card 1: Total Members -->
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Total Members" textFill="#888888" />
+                        <Label fx:id="totalMembersLabel" text="0" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <!-- Card 2: Total Revenue -->
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Total Revenue (All Time)" textFill="#888888" />
+                        <Label fx:id="monthlyRevenueLabel" text="0 MAD" textFill="#00e676">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <!-- Card 3: Active Sessions -->
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Active Sessions (Today)" textFill="#888888" />
+                        <Label fx:id="activeSessionsLabel" text="0" textFill="#29b6f6">
+                           <font>
+                              <Font name="System Bold" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Charts Row 1: REVENUE + PLAN DISTRIBUTION -->
+            <HBox spacing="20.0" prefHeight="300.0">
+               <children>
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Revenue Last 6 Months" textFill="#888888" />
+                        <LineChart fx:id="revenueChart" animated="false" createSymbols="true" legendVisible="false">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Active Plans Distribution" textFill="#888888" />
+                        <PieChart fx:id="planPieChart" animated="false" legendVisible="true" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <!-- Charts Row 2: NEW MEMBERS + NOTIFICATIONS -->
+            <HBox spacing="20.0" prefHeight="300.0">
+               <children>
+                   <VBox styleClass="card" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="New Members Registration" textFill="#888888" />
+                        <BarChart fx:id="registrationChart" animated="false" legendVisible="false">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" tickLabelFill="WHITE" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+                          </yAxis>
+                        </BarChart>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox styleClass="card" prefWidth="350.0">
+                     <children>
+                        <Label text="Notifications (Expiring soon)" textFill="#ffab40">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="expiringMembersContainer" spacing="5.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            
+            <!-- Weekly Schedule Section -->
+            <VBox spacing="15.0">
+               <children>
+                  <Label text="Weekly Coach Planning" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="scheduleContainer" spacing="10.0" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" top="10.0" />
+               </padding>
+            </VBox>
+
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

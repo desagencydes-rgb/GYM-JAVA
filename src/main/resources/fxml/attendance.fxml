@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Attendance View
+  - Top: Title
+  - Middle: Split Control Panel
+    - Left: Manual Check-In Card
+    - Right: Auto-Check-In (Face Recognition) Card
+  - Bottom: Recent Activity Log (List)
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="750.0" prefWidth="950.0" spacing="25.0" style="-fx-background-color: #121212;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.app.controller.AttendanceController">
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+   <children>
+      <!-- Title Header -->
+      <HBox alignment="CENTER_LEFT">
+          <Label text="Attendance Register" textFill="WHITE">
+             <font>
+                <Font name="System Bold" size="28.0" />
+             </font>
+          </Label>
+          <Region HBox.hgrow="ALWAYS" />
+      </HBox>
+      
+      <!-- Check-In Areas -->
+      <HBox spacing="30.0" alignment="CENTER_LEFT">
+          
+          <!-- Manual Check-In -->
+          <VBox spacing="15.0" styleClass="card" minWidth="400.0">
+              <padding>
+                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+              </padding>
+              <children>
+                  <Label text="Quick Check-In" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Select a member to register their arrival." textFill="WHITE" wrapText="true" />
+                  
+                  <ComboBox fx:id="memberComboBox" promptText="Select User..." maxWidth="Infinity" />
+                  
+                  <Button onAction="#handleCheckIn" text="Check In Now" styleClass="action-button-large" maxWidth="Infinity" />
+              </children>
+          </VBox>
+          
+          <!-- Auto-Attendance (Face ID) -->
+          <VBox spacing="15.0" styleClass="card" minWidth="400.0">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+               <children>
+                  <Label text="Auto-Attendance (Face ID)" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="toggleAutoBtn" text="Start Scanning" onAction="#handleToggleAuto" style="-fx-background-color: #7c4dff; -fx-text-fill: white; -fx-font-weight: bold;" maxWidth="Infinity" />
+                  
+                  <!-- Camera Viewport -->
+                  <VBox fx:id="faceScanContainer" alignment="CENTER" minHeight="240.0" style="-fx-border-color: #333; -fx-border-style: dashed;">
+                        <Label text="Camera IDLE" textFill="#555" />
+                  </VBox>
+               </children>
+          </VBox>
+          
+          <!-- Instructions Side Panel -->
+          <VBox spacing="10.0" style="-fx-border-color: #333; -fx-border-radius: 12; -fx-border-width: 1; -fx-padding: 20;" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+              <Label text="Instructions" textFill="#888888" />
+               <Label text="• Select member from dropdown for manual entry." textFill="#555" />
+               <Label text="• System automatically logs timestamp." textFill="#555" />
+               <Label text="• Recent checks appear below." textFill="#555" />
+          </VBox>
+      </HBox>
+      
+      <!-- List Area -->
+      <VBox spacing="10.0" VBox.vgrow="ALWAYS">
+          <Label text="Recent Activity Feed" textFill="#888888">
+             <font>
+                <Font size="16.0" />
+             </font>
+          </Label>
+          <ListView fx:id="attendanceList" styleClass="edge-to-edge" VBox.vgrow="ALWAYS" />
+      </VBox>
+   </children>
+</VBox>

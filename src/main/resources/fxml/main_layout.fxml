@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Main Application Layout
+  - Root: BorderPane
+  - Left: Sidebar Navigation (VBox) with buttons for different modules.
+  - Center: Content Area (StackPane) where different views (Dashboard, Members, etc.) are injected.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="mainBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.app.controller.MainLayoutController">
+   
+   <!-- SIDEBAR -->
+   <left>
+      <VBox prefHeight="700.0" prefWidth="220.0" spacing="10.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="GYM APP" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            
+            <!-- Navigation Buttons -->
+            <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showDashboard" styleClass="sidebar-button" text="Dashboard" />
+            <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showMembers" styleClass="sidebar-button" text="Members" />
+            <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showCoaches" styleClass="sidebar-button" text="Coaches &amp; Planning" />
+             <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showAttendance" styleClass="sidebar-button" text="Attendance" />
+            <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showPayments" styleClass="sidebar-button" text="Payments" />
+            
+            <!-- Bottom Section (Debug & Logout) -->
+             <VBox alignment="BOTTOM_LEFT" VBox.vgrow="ALWAYS">
+                 <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showDebug" styleClass="sidebar-button" text="Debug / Time" />
+                 <Button alignment="BASELINE_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#logout" styleClass="sidebar-button" text="Logout" />
+             </VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </VBox>
+   </left>
+   
+   <!-- CONTENT AREA -->
+   <center>
+      <StackPane fx:id="contentArea" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #121212;" BorderPane.alignment="CENTER">
+         <children>
+            <!-- Default Placeholder if no view loads -->
+            <Label text="Welcome to Gym Management" textFill="#555555">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

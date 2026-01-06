@@ -1,0 +1,22 @@
+# Maven
+target/
+*.log
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.db
+*.sqllite
+apache-maven-*/
+apache-maven.zip
+.gemini/

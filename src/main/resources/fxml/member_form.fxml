@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Member Entry Form
+  - Fields for biographical info (Name, Phone, Email, Gender).
+  - Facial Recognition Enrollment section (Camera View Container).
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="700.0" prefWidth="550.0" spacing="15.0" style="-fx-background-color: #1e1e1e;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.app.controller.MemberFormController">
+   <padding>
+      <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+   </padding>
+   <children>
+      <Label text="Add New Member" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </Label>
+      
+      <!-- Name Fields Row -->
+      <HBox spacing="15.0">
+         <children>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="First Name" textFill="WHITE" />
+                  <TextField fx:id="firstNameField" />
+               </children>
+            </VBox>
+            <VBox HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Last Name" textFill="WHITE" />
+                  <TextField fx:id="lastNameField" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      
+      <!-- Contact Info -->
+      <Label text="Phone (10 digits)" textFill="WHITE" />
+      <TextField fx:id="phoneField" promptText="0600000000" />
+      
+      <Label text="Email" textFill="WHITE" />
+      <TextField fx:id="emailField" promptText="email@domain.com" />
+      
+      <Label text="Gender" textFill="WHITE" />
+      <ComboBox fx:id="genderBox" prefWidth="150.0" />
+
+      <!-- Facial Recognition Section -->
+      <Label text="Facial Recognition" textFill="WHITE" />
+      <Button fx:id="enrollButton" text="Enroll Face ID" onAction="#handleEnrollFace" style="-fx-background-color: #29b6f6; -fx-text-fill: white;" />
+      <Label fx:id="faceIdStatusLabel" text="No Face Enrolled" textFill="#888888" />
+      
+      <!-- Camera Container (Initially Hidden) -->
+      <VBox fx:id="cameraContainer" alignment="CENTER" spacing="10" visible="false" managed="false" style="-fx-border-color: #444; -fx-padding: 10;">
+            <!-- FaceCamView is injected here via Controller -->
+            <Button text="Capture &amp; Save" onAction="#handleCaptureFace" style="-fx-background-color: #00e676; -fx-text-fill: white; -fx-font-weight: bold;" />
+      </VBox>
+      
+      <!-- Action Buttons -->
+      <HBox alignment="CENTER_RIGHT" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handleCancel" style="-fx-background-color: #555;" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleSave" text="Save Member" />
+         </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

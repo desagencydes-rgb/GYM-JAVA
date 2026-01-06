@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Payments Management View
+  - Top: Entry form to add new payments.
+  - Body: List of recent transactions.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="700.0" prefWidth="900.0" spacing="20.0" style="-fx-background-color: #121212;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gym.app.controller.PaymentsController">
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label text="Payments &amp; Transactions" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      
+      <!-- ADD PAYMENT FORM -->
+      <HBox spacing="15.0" styleClass="card" alignment="CENTER_LEFT">
+          <children>
+              <Label text="New Payment:" textFill="WHITE" />
+              <ComboBox fx:id="memberComboBox" promptText="Select Member" prefWidth="200.0" />
+              <TextField fx:id="amountField" promptText="Amount (MAD)" prefWidth="100.0" />
+              <ComboBox fx:id="methodBox" prefWidth="100.0" />
+              <Button onAction="#handleAddPayment" text="Record Payment" />
+          </children>
+          <padding>
+             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+          </padding>
+      </HBox>
+      
+      <!-- TX LIST -->
+      <ListView fx:id="paymentsListView" styleClass="edge-to-edge" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>
