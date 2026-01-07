@@ -1,0 +1,99 @@
+# User Workflows
+
+This document outlines the key operational workflows of the Gym Management System.
+
+## 1. Member Management
+
+### 1.1 Add New Member
+This workflow describes how a new gym member is registered, including the optional facial recognition enrollment.
+
+```mermaid
+sequenceDiagram
+    actor Staff as "User (Staff)"
+    participant UI as MemberFormController
+    participant FaceService as FaceRecognitionService
+    participant DB as MemberDAO
+
+    Staff->>UI: Click "Add Member"
+    UI->>Staff: Show Member Form
+    Staff->>UI: Enter Name, Phone, Email
+    
+    rect rgb(200, 255, 200)
+    note right of Staff: Optional: Face Enrollment
+    Staff->>UI: Toggle "Enroll Face ID"
+    UI->>Staff: Show Camera Feed
+    Staff->>UI: Click "Capture"
+    UI->>FaceService: enrollFace(image, name)
+    FaceService-->>UI: Return Face Token
+    end
+
+    Staff->>UI: Click "Save"
+    UI->>UI: Validate Inputs
+    UI->>DB: addMember(Member Object)
+    DB-->>UI: Success
+    UI->>Staff: Close Form & Refresh List
+```
+
+### 1.2 Update Member
+Similar to adding a member, but pre-filled with existing data.
+
+## 2. Attendance Tracking
+
+The system supports two methods for checking in members.
+
+### 2.1 Manual Check-in
+Used when facial recognition is unavailable or bypassed.
+
+```mermaid
+flowchart LR
+    A[Staff selects Member from Dropdown] --> B{Member Selected?}
+    B -- Yes --> C[Click 'Check-In' Button]
+    C --> D[System logs Attendance in DB]
+    D --> E[Update 'Recent Activity' List]
+```
+
+### 2.2 Automated Face Recognition Check-in
+The primary method for quick member access.
+
+```mermaid
+sequenceDiagram
+    actor Member
+    participant Camera as FaceCamView
+    participant Ctrl as AttendanceController
+    participant Service as FaceRecognitionService
+    participant DB as AttendanceDAO
+
+    Note over Ctrl: Timer Loop (Every 3s)
+    Ctrl->>Camera: Capture Frame
+    Camera-->>Ctrl: BufferedImage
+    Ctrl->>Service: recognizeFace(image)
+    
+    alt Face Recognized
+        Service-->>Ctrl: Returns "Member Name"
+        Ctrl->>DB: Find Member by Name
+        DB-->>Ctrl: Member Object
+        Ctrl->>DB: checkIn(Member ID)
+        Ctrl->>Camera: Show GREEN Feedback ("Welcome [Name]")
+    else Unknown Face
+        Service-->>Ctrl: Returns null
+        Ctrl->>Camera: Show RED Feedback ("Not Recognized")
+    end
+```
+
+## 3. Financial Management
+
+### 3.1 Record Payment
+Tracks subscription payments from members.
+
+```mermaid
+graph TD
+    Start([Start]) --> SelectMember[Select Member from Dropdown]
+    SelectMember --> InputAmount["Enter Amount (MAD)"]
+    InputAmount --> SelectMethod["Select Method (Cash/TPE)"]
+    SelectMethod --> ClickAdd["Click 'Add Payment'"]
+    
+    ClickAdd --> Validate{Valid Input?}
+    Validate -- No --> Error[Ignore/Show Error]
+    Validate -- Yes --> SaveDB[(Save to Database)]
+    SaveDB --> Refresh[Refresh Payment List]
+```

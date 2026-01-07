@@ -1,0 +1,84 @@
+# System Architecture
+
+## Overview
+The Gym Management System follows a classic MVC (Model-View-Controller) pattern adapted for JavaFX.
+
+```mermaid
+graph TD
+    subgraph UI ["User Interface (JavaFX)"]
+        MainApp[Main Application]
+        Login[Login View]
+        Dashboard[Dashboard View]
+        MemberMgmt[Member Management]
+        Attendance[Attendance Tracking]
+        Payments[Payments]
+    end
+
+    subgraph Controllers [Controllers]
+        LoginCtrl[LoginController]
+        DashCtrl[DashboardController]
+        MemberCtrl[MemberFormController / MembersListController]
+        AttendCtrl[AttendanceController]
+        PayCtrl[PaymentsController]
+    end
+
+    subgraph Services [Services]
+        FaceRec[Face Recognition Service]
+        Webcam[Webcam Service]
+    end
+
+    subgraph DAO [Data Access Objects]
+        MemberDAO[MemberDAO]
+        AttendDAO[AttendanceDAO]
+        PayDAO[PaymentDAO]
+        CoachDAO[CoachDAO]
+    end
+
+    subgraph Database [Database]
+        SQLite[(SQLite Database)]
+    end
+
+    %% Connections
+    MainApp --> Login
+    Login --> LoginCtrl
+    
+    LoginCtrl --> DashCtrl
+    DashCtrl --> MemberMgmt
+    DashCtrl --> Attendance
+    DashCtrl --> Payments
+
+    MemberMgmt --> MemberCtrl
+    Attendance --> AttendCtrl
+    Payments --> PayCtrl
+
+    MemberCtrl --> MemberDAO
+    AttendCtrl --> FaceRec
+    AttendCtrl --> AttendDAO
+    PayCtrl --> PayDAO
+
+    FaceRec --> Webcam
+    
+    MemberDAO --> SQLite
+    AttendDAO --> SQLite
+    PayDAO --> SQLite
+    CoachDAO --> SQLite
+```
+
+## Component Roles
+
+### Controllers
+Handle user interactions from the FXML views. They validate input and orchestrate calls to the Service and DAO layers.
+
+### Services
+Contain business logic, particularly for hardware integration like:
+- **FaceRecognitionService**: Interfaces with camera and recognition libraries.
+- **WebcamService**: Manages camera hardware.
+
+### DAOs (Data Access Objects)
+Manage direct database operations (CRUD) for specific entities.
+- **MemberDAO**: CRUD for members.
+- **PaymentDAO**: Tracks payments.
+- **AttendanceDAO**: Logs entry/exit.
+
+### Database
+- **SQLite**: Local database storage.
